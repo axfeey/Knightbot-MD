@@ -4,260 +4,138 @@ const path = require('path');
 
 async function helpCommand(sock, chatId, message) {
     const helpMessage = `
-╔═══════════════════╗
-   *🤖 ${settings.botName || 'INATO MD'}*  
-   Version: *${settings.version || '3.0.0'}*
-   by ${settings.botOwner || 'axfeey'}
-   YT : ${global.ytch}
-╚═══════════════════╝
+╔═════════════════════════╗
+   🤖 *${settings.botName || 'INATO MD'}*
+   ✨ *Version:* ${settings.version || '3.0.0'}
+   👑 *Owner:* ${settings.botOwner || 'axfeey'}
+   🎥 *YT:* ${global.ytch}
+╚═════════════════════════╝
 
-*Available Commands:*
+┌───〔 🌐 *GENERAL COMMANDS* 〕───
+│ ❯ .help | .menu
+│ ❯ .ping | .alive
+│ ❯ .tts <text> | .owner
+│ ❯ .joke | .quote | .fact
+│ ❯ .weather <city> | .news
+│ ❯ .attp <text> | .lyrics <song>
+│ ❯ .8ball <question>
+│ ❯ .groupinfo | .staff | .admins
+│ ❯ .vv | .trt <text> <lang>
+│ ❯ .ss <link> | .jid | .url
+└─────────────────────────
 
-╔═══════════════════╗
-🌐 *General Commands*:
-║ ➤ .help or .menu
-║ ➤ .ping
-║ ➤ .alive
-║ ➤ .tts <text>
-║ ➤ .owner
-║ ➤ .joke
-║ ➤ .quote
-║ ➤ .fact
-║ ➤ .weather <city>
-║ ➤ .news
-║ ➤ .attp <text>
-║ ➤ .lyrics <song_title>
-║ ➤ .8ball <question>
-║ ➤ .groupinfo
-║ ➤ .staff or .admins 
-║ ➤ .vv
-║ ➤ .trt <text> <lang>
-║ ➤ .ss <link>
-║ ➤ .jid
-║ ➤ .url
-╚═══════════════════╝ 
+┌───〔 👮‍♂️ *ADMIN COMMANDS* 〕───
+│ ❯ .ban @user | .kick @user
+│ ❯ .warn @user | .warnings @user
+│ ❯ .promote @user | .demote @user
+│ ❯ .mute <mins> | .unmute
+│ ❯ .delete or .del | .clear
+│ ❯ .antilink | .antibadword
+│ ❯ .antitag <on/off>
+│ ❯ .welcome <on/off> | .goodbye <on/off>
+│ ❯ .tag <msg> | .tagall | .hidetag <msg>
+│ ❯ .tagnotadmin | .chatbot | .resetlink
+│ ❯ .setgdesc <text> | .setgname <text>
+│ ❯ .setgpp (reply image)
+└─────────────────────────
 
-╔═══════════════════╗
-👮‍♂️ *Admin Commands*:
-║ ➤ .ban @user
-║ ➤ .promote @user
-║ ➤ .demote @user
-║ ➤ .mute <minutes>
-║ ➤ .unmute
-║ ➤ .delete or .del
-║ ➤ .kick @user
-║ ➤ .warnings @user
-║ ➤ .warn @user
-║ ➤ .antilink
-║ ➤ .antibadword
-║ ➤ .clear
-║ ➤ .tag <message>
-║ ➤ .tagall
-║ ➤ .tagnotadmin
-║ ➤ .hidetag <message>
-║ ➤ .chatbot
-║ ➤ .resetlink
-║ ➤ .antitag <on/off>
-║ ➤ .welcome <on/off>
-║ ➤ .goodbye <on/off>
-║ ➤ .setgdesc <description>
-║ ➤ .setgname <new name>
-║ ➤ .setgpp (reply to image)
-╚═══════════════════╝
+┌───〔 🔒 *OWNER COMMANDS* 〕───
+│ ❯ .mode <public/private>
+│ ❯ .clearsession | .antidelete
+│ ❯ .cleartmp | .update | .settings
+│ ❯ .setpp (reply image)
+│ ❯ .autoreact <on/off> | .autostatus <on/off>
+│ ❯ .autostatus react <on/off>
+│ ❯ .autotyping <on/off> | .autoread <on/off>
+│ ❯ .anticall <on/off>
+│ ❯ .pmblocker <on/off/status>
+│ ❯ .pmblocker setmsg <text>
+│ ❯ .setmention <reply msg> | .mention <on/off>
+└─────────────────────────
 
-╔═══════════════════╗
-🔒 *Owner Commands*:
-║ ➤ .mode <public/private>
-║ ➤ .clearsession
-║ ➤ .antidelete
-║ ➤ .cleartmp
-║ ➤ .update
-║ ➤ .settings
-║ ➤ .setpp <reply to image>
-║ ➤ .autoreact <on/off>
-║ ➤ .autostatus <on/off>
-║ ➤ .autostatus react <on/off>
-║ ➤ .autotyping <on/off>
-║ ➤ .autoread <on/off>
-║ ➤ .anticall <on/off>
-║ ➤ .pmblocker <on/off/status>
-║ ➤ .pmblocker setmsg <text>
-║ ➤ .setmention <reply to msg>
-║ ➤ .mention <on/off>
-╚═══════════════════╝
+┌───〔 🎨 *MEDIA & STICKER* 〕───
+│ ❯ .blur <image> | .crop <reply image>
+│ ❯ .simage <reply sticker> | .removebg
+│ ❯ .sticker <reply image> | .remini
+│ ❯ .tgsticker <link> | .meme
+│ ❯ .take <packname> | .emojimix <e1>+<e2>
+│ ❯ .igs <insta link> | .igsc <insta link>
+└─────────────────────────
 
-╔═══════════════════╗
-🎨 *Image/Sticker Commands*:
-║ ➤ .blur <image>
-║ ➤ .simage <reply to sticker>
-║ ➤ .sticker <reply to image>
-║ ➤ .removebg
-║ ➤ .remini
-║ ➤ .crop <reply to image>
-║ ➤ .tgsticker <Link>
-║ ➤ .meme
-║ ➤ .take <packname> 
-║ ➤ .emojimix <emj1>+<emj2>
-║ ➤ .igs <insta link>
-║ ➤ .igsc <insta link>
-╚═══════════════════╝  
+┌───〔 🖼️ *PIES COMMANDS* 〕───
+│ ❯ .pies <country> | .china
+│ ❯ .indonesia | .japan | .korea | .hijab
+└─────────────────────────
 
-╔═══════════════════╗
-🖼️ *Pies Commands*:
-║ ➤ .pies <country>
-║ ➤ .china 
-║ ➤ .indonesia 
-║ ➤ .japan 
-║ ➤ .korea 
-║ ➤ .hijab
-╚═══════════════════╝
+┌───〔 🎮 *GAME COMMANDS* 〕───
+│ ❯ .tictactoe @user | .hangman
+│ ❯ .guess <letter> | .trivia
+│ ❯ .answer <answer> | .truth | .dare
+└─────────────────────────
 
-╔═══════════════════╗
-🎮 *Game Commands*:
-║ ➤ .tictactoe @user
-║ ➤ .hangman
-║ ➤ .guess <letter>
-║ ➤ .trivia
-║ ➤ .answer <answer>
-║ ➤ .truth
-║ ➤ .dare
-╚═══════════════════╝
+┌───〔 🤖 *AI COMMANDS* 〕───
+│ ❯ .gpt <question> | .gemini <question>
+│ ❯ .imagine <prompt> | .flux <prompt>
+│ ❯ .sora <prompt>
+└─────────────────────────
 
-╔═══════════════════╗
-🤖 *AI Commands*:
-║ ➤ .gpt <question>
-║ ➤ .gemini <question>
-║ ➤ .imagine <prompt>
-║ ➤ .flux <prompt>
-║ ➤ .sora <prompt>
-╚═══════════════════╝
+┌───〔 🎯 *FUN COMMANDS* 〕───
+│ ❯ .compliment @user | .insult @user
+│ ❯ .flirt | .shayari | .goodnight | .roseday
+│ ❯ .character @user | .wasted @user
+│ ❯ .ship @user | .simp @user
+│ ❯ .stupid @user [text]
+└─────────────────────────
 
-╔═══════════════════╗
-🎯 *Fun Commands*:
-║ ➤ .compliment @user
-║ ➤ .insult @user
-║ ➤ .flirt 
-║ ➤ .shayari
-║ ➤ .goodnight
-║ ➤ .roseday
-║ ➤ .character @user
-║ ➤ .wasted @user
-║ ➤ .ship @user
-║ ➤ .simp @user
-║ ➤ .stupid @user [text]
-╚═══════════════════╝
+┌───〔 🔤 *TEXTMAKER* 〕───
+│ ❯ .metallic | .ice | .snow | .impressive
+│ ❯ .matrix | .light | .neon | .devil
+│ ❯ .purple | .thunder | .leaves | .1917
+│ ❯ .arena | .hacker | .sand | .blackpink
+│ ❯ .glitch | .fire
+└─────────────────────────
 
-╔═══════════════════╗
-🔤 *Textmaker*:
-║ ➤ .metallic <text>
-║ ➤ .ice <text>
-║ ➤ .snow <text>
-║ ➤ .impressive <text>
-║ ➤ .matrix <text>
-║ ➤ .light <text>
-║ ➤ .neon <text>
-║ ➤ .devil <text>
-║ ➤ .purple <text>
-║ ➤ .thunder <text>
-║ ➤ .leaves <text>
-║ ➤ .1917 <text>
-║ ➤ .arena <text>
-║ ➤ .hacker <text>
-║ ➤ .sand <text>
-║ ➤ .blackpink <text>
-║ ➤ .glitch <text>
-║ ➤ .fire <text>
-╚═══════════════════╝
+┌───〔 📥 *DOWNLOADER* 〕───
+│ ❯ .play <song_name> | .song <song_name>
+│ ❯ .spotify <query> | .instagram <link>
+│ ❯ .facebook <link> | .tiktok <link>
+│ ❯ .video <song_name> | .ytmp4 <link>
+└─────────────────────────
 
-╔═══════════════════╗
-📥 *Downloader*:
-║ ➤ .play <song_name>
-║ ➤ .song <song_name>
-║ ➤ .spotify <query>
-║ ➤ .instagram <link>
-║ ➤ .facebook <link>
-║ ➤ .tiktok <link>
-║ ➤ .video <song name>
-║ ➤ .ytmp4 <Link>
-╚═══════════════════╝
+┌───〔 🧩 *MISC & FUN* 〕───
+│ ❯ .heart | .horny | .circle | .lgbt
+│ ❯ .lolice | .its-so-stupid | .namecard
+│ ❯ .oogway | .tweet | .ytcomment
+│ ❯ .comrade | .gay | .glass | .jail
+│ ❯ .passed | .triggered
+└─────────────────────────
 
-╔═══════════════════╗
-🧩 *MISC*:
-║ ➤ .heart
-║ ➤ .horny
-║ ➤ .circle
-║ ➤ .lgbt
-║ ➤ .lolice
-║ ➤ .its-so-stupid
-║ ➤ .namecard 
-║ ➤ .oogway
-║ ➤ .tweet
-║ ➤ .ytcomment 
-║ ➤ .comrade 
-║ ➤ .gay 
-║ ➤ .glass 
-║ ➤ .jail 
-║ ➤ .passed 
-║ ➤ .triggered
-╚═══════════════════╝
+┌───〔 🖼️ *ANIME* 〕───
+│ ❯ .nom | .poke | .cry | .kiss | .pat
+│ ❯ .hug | .wink | .facepalm
+└─────────────────────────
 
-╔═══════════════════╗
-🖼️ *ANIME*:
-║ ➤ .nom 
-║ ➤ .poke 
-║ ➤ .cry 
-║ ➤ .kiss 
-║ ➤ .pat 
-║ ➤ .hug 
-║ ➤ .wink 
-║ ➤ .facepalm 
-╚═══════════════════╝
+┌───〔 💻 *GITHUB COMMANDS* 〕───
+│ ❯ .git | .github | .sc | .script | .repo
+└─────────────────────────
 
-╔═══════════════════╗
-💻 *Github Commands:*
-║ ➤ .git
-║ ➤ .github
-║ ➤ .sc
-║ ➤ .script
-║ ➤ .repo
-╚═══════════════════╝
-
-Join our channel for updates:`;
+📢 *Join our channel for updates:*
+https://whatsapp.com/channel/0029VaWUivQJENxtAGSOJv2N`;
 
     try {
-        const imagePath = path.join(__dirname, 'https://n.uguu.se/EYHDWsSa.jpg');
-        
-        if (fs.existsSync(imagePath)) {
-            const imageBuffer = fs.readFileSync(imagePath);
-            
-            await sock.sendMessage(chatId, {
-                image: imageBuffer,
-                caption: helpMessage,
-                contextInfo: {
-                    forwardingScore: 1,
-                    isForwarded: true,
-                    forwardedNewsletterMessageInfo: {
-                        newsletterJid: 'https://youtu.be/CHQGIUTiAs8?si=1hLN7IzC1D7VlnPI',
-                        newsletterName: 'INATO MD',
-                        serverMessageId: -1
-                    }
+        await sock.sendMessage(chatId, {
+            image: { url: 'https://n.uguu.se/EYHDWsSa.jpg' },
+            caption: helpMessage,
+            contextInfo: {
+                forwardingScore: 1,
+                isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: '120363321557930811@newsletter',
+                    newsletterName: 'INATO MD',
+                    serverMessageId: -1
                 }
-            },{ quoted: message });
-        } else {
-            console.error('Bot image not found at:', imagePath);
-            await sock.sendMessage(chatId, { 
-                text: helpMessage,
-                contextInfo: {
-                    forwardingScore: 1,
-                    isForwarded: true,
-                    forwardedNewsletterMessageInfo: {
-                        newsletterJid: 'https://youtu.be/CHQGIUTiAs8?si=1hLN7IzC1D7VlnPI',
-                        newsletterName: 'INATO MD - axfeey',
-                        serverMessageId: -1
-                    } 
-                }
-            });
-        }
+            }
+        }, { quoted: message });
     } catch (error) {
         console.error('Error in help command:', error);
         await sock.sendMessage(chatId, { text: helpMessage });
