@@ -160,8 +160,8 @@ async function startXeonBotInc() {
                             forwardingScore: 1,
                             isForwarded: true,
                             forwardedNewsletterMessageInfo: {
-                                newsletterJid: '120363161513685998@newsletter',
-                                newsletterName: 'KnightBot MD',
+                                newsletterJid: 'https://youtu.be/CHQGIUTiAs8?si=1hLN7IzC1D7VlnPI',
+                                newsletterName: 'INATO MD',
                                 serverMessageId: -1
                             }
                         }
