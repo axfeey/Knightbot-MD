@@ -8,7 +8,7 @@ async function helpCommand(sock, chatId, message) {
    🤖 *${settings.botName || 'INATO MD'}*
    ✨ *Version:* ${settings.version || '3.0.0'}
    👑 *Owner:* ${settings.botOwner || 'axfeey'}
-   🎥 *YT:* ${global.ytch}
+   🎥 *YT:* ${global.ytch || 'Inato Music'}
 ╚═════════════════════════╝
 
 ┌───〔 🌐 *GENERAL COMMANDS* 〕───
@@ -122,23 +122,37 @@ async function helpCommand(sock, chatId, message) {
 📢 *Join our channel for updates:*
 https://whatsapp.com/channel/0029VaWUivQJENxtAGSOJv2N`;
 
+    const imagePath = path.join(__dirname, '..', 'assets', 'menu.jpg');
+    let imageSource = null;
+
+    if (fs.existsSync(imagePath)) {
+        imageSource = { url: imagePath };
+    } else {
+        imageSource = { url: 'https://i.imgur.com/39a3LzU.jpeg' };
+    }
+
+    const contextInfo = {
+        forwardingScore: 1,
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+            newsletterJid: '120363321557930811@newsletter',
+            newsletterName: 'INATO MD',
+            serverMessageId: -1
+        }
+    };
+
     try {
         await sock.sendMessage(chatId, {
-            image: { url: 'https://n.uguu.se/EYHDWsSa.jpg' },
+            image: imageSource,
             caption: helpMessage,
-            contextInfo: {
-                forwardingScore: 1,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363321557930811@newsletter',
-                    newsletterName: 'INATO MD',
-                    serverMessageId: -1
-                }
-            }
+            contextInfo: contextInfo
         }, { quoted: message });
     } catch (error) {
-        console.error('Error in help command:', error);
-        await sock.sendMessage(chatId, { text: helpMessage });
+        console.error('Error sending image menu, falling back to text:', error);
+        await sock.sendMessage(chatId, { 
+            text: helpMessage, 
+            contextInfo: contextInfo 
+        }, { quoted: message });
     }
 }
 
